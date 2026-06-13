@@ -40,6 +40,32 @@ namespace ActividadPractica2.Controllers
 
         };
 
+      
+        [HttpGet]
+        public IActionResult ObtenerTodos()
+        {
+            return Ok(estudiantes);
+        }
+
+       
+        [HttpGet("{id}")]
+
+        public IActionResult BuscarPorId(int id)
+        {
+
+            var estudiante = estudiantes.FirstOrDefault(x => x.Id == id);
+
+
+            if (estudiante == null)
+            {
+                return NotFound();
+            }
+
+
+            return Ok(estudiante);
+
+        }
+
 
     }
 }
