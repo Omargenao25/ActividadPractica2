@@ -67,6 +67,53 @@ namespace ActividadPractica2.Controllers
         }
 
 
+        [HttpPost]
+
+        public IActionResult Crear(Estudiante estudiante)
+        {
+
+
+            estudiante.Id = estudiantes.Count + 1;
+
+
+            estudiantes.Add(estudiante);
+
+
+            return Created("", estudiante);
+
+        }
+
+
+        [HttpPut("{id}")]
+
+        public IActionResult Actualizar(int id, Estudiante nuevo)
+        {
+
+
+            var estudiante = estudiantes.FirstOrDefault(x => x.Id == id);
+
+
+            if (estudiante == null)
+            {
+                return NotFound();
+            }
+
+
+            estudiante.Nombre = nuevo.Nombre;
+            estudiante.Apellido = nuevo.Apellido;
+            estudiante.Correo = nuevo.Correo;
+            estudiante.Carrera = nuevo.Carrera;
+            estudiante.Edad = nuevo.Edad;
+            estudiante.Promedio = nuevo.Promedio;
+            estudiante.Activo = nuevo.Activo;
+
+
+
+            return NoContent();
+
+        }
+
+
     }
 }
 
