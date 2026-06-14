@@ -114,6 +114,66 @@ namespace ActividadPractica2.Controllers
         }
 
 
+        [HttpDelete("{id}")]
+
+        public IActionResult Eliminar(int id)
+        {
+
+
+            var estudiante = estudiantes.FirstOrDefault(x => x.Id == id);
+
+
+            if (estudiante == null)
+            {
+                return NotFound();
+            }
+
+
+            estudiantes.Remove(estudiante);
+
+
+            return NoContent();
+
+        }
+
+
+        [HttpGet("buscar")]
+
+        public IActionResult Buscar(string texto)
+        {
+
+
+            var resultado = estudiantes
+                .Where(x =>
+                x.Nombre.ToLower().Contains(texto.ToLower()) ||
+                x.Apellido.ToLower().Contains(texto.ToLower()))
+                .ToList();
+
+
+
+            return Ok(resultado);
+
+        }
+
+
+        [HttpGet("carrera/{carrera}")]
+
+
+        public IActionResult BuscarCarrera(string carrera)
+        {
+
+
+            var resultado = estudiantes
+                .Where(x => x.Carrera.ToLower() == carrera.ToLower())
+                .ToList();
+
+
+            return Ok(resultado);
+
+        }
+
+
+
     }
 }
 
