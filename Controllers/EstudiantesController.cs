@@ -173,6 +173,80 @@ namespace ActividadPractica2.Controllers
         }
 
 
+        [HttpGet("aprobados")]
+
+        public IActionResult Aprobados(decimal promedioMinimo = 70)
+        {
+
+
+            var lista = estudiantes
+                .Where(x => x.Promedio >= promedioMinimo)
+                .ToList();
+
+
+
+            return Ok(lista);
+
+        }
+
+
+        [HttpGet("ordenar")]
+
+        public IActionResult Ordenar(string por, string direccion)
+        {
+
+
+            List<Estudiante> resultado;
+
+
+
+            if (por == "nombre")
+            {
+                resultado = estudiantes.OrderBy(x => x.Nombre).ToList();
+            }
+
+
+            else if (por == "edad")
+            {
+                resultado = estudiantes.OrderBy(x => x.Edad).ToList();
+            }
+
+
+            else
+            {
+                resultado = estudiantes.OrderBy(x => x.Promedio).ToList();
+            }
+
+
+
+            if (direccion == "desc")
+            {
+                resultado.Reverse();
+            }
+
+
+            return Ok(resultado);
+
+        }
+
+
+        [HttpGet("rango")]
+
+        public IActionResult Rango(decimal promedioDesde, decimal promedioHasta)
+        {
+
+
+            var resultado = estudiantes
+                .Where(x =>
+                x.Promedio >= promedioDesde &&
+                x.Promedio <= promedioHasta)
+                .ToList();
+
+
+            return Ok(resultado);
+
+        }
+
 
     }
 }
