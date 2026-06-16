@@ -47,6 +47,7 @@ namespace ActividadPractica2.Controllers
             return Ok(estudiantes);
         }
 
+
        
         [HttpGet("{id}")]
 
@@ -172,7 +173,7 @@ namespace ActividadPractica2.Controllers
 
         }
 
-
+        
         [HttpGet("aprobados")]
 
         public IActionResult Aprobados(decimal promedioMinimo = 70)
@@ -188,6 +189,7 @@ namespace ActividadPractica2.Controllers
             return Ok(lista);
 
         }
+
 
 
         [HttpGet("ordenar")]
@@ -230,6 +232,7 @@ namespace ActividadPractica2.Controllers
         }
 
 
+
         [HttpGet("rango")]
 
         public IActionResult Rango(decimal promedioDesde, decimal promedioHasta)
@@ -244,6 +247,58 @@ namespace ActividadPractica2.Controllers
 
 
             return Ok(resultado);
+
+        }
+
+
+
+        [HttpGet("estadisticas")]
+
+        public IActionResult Estadisticas()
+        {
+
+            var cantidad = estudiantes.Count;
+
+
+            var aprobados = estudiantes
+                .Where(x => x.Promedio >= 70)
+                .Count();
+
+
+            var reprobados = cantidad - aprobados;
+
+
+            var promedioGeneral = estudiantes
+                .Average(x => x.Promedio);
+
+
+
+            var mejor = estudiantes
+                .Max(x => x.Promedio);
+
+
+
+            var peor = estudiantes
+                .Min(x => x.Promedio);
+
+
+            return Ok(new
+            {
+
+                cantidadTotal = cantidad,
+
+                cantidadAprobados = aprobados,
+
+                cantidadReprobados = reprobados,
+
+                promedioGeneral = promedioGeneral,
+
+                mejorPromedio = mejor,
+
+                peorPromedio = peor
+
+            });
+
 
         }
 
