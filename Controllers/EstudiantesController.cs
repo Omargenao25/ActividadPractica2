@@ -300,8 +300,54 @@ namespace ActividadPractica2.Controllers
             });
 
 
+
         }
 
+
+
+        [HttpPut("{id}/estado")]
+
+        public IActionResult CambiarEstado(int id, bool activo)
+        {
+
+
+            var estudiante = estudiantes
+                .FirstOrDefault(x => x.Id == id);
+
+
+
+            if (estudiante == null)
+            {
+                return NotFound();
+            }
+
+
+
+            estudiante.Activo = activo;
+
+
+
+            return NoContent();
+
+        }
+
+
+
+        [HttpGet("activos")]
+
+        public IActionResult Activos()
+        {
+
+
+            var lista = estudiantes
+                .Where(x => x.Activo == true)
+                .ToList();
+
+
+
+            return Ok(lista);
+
+        }
 
     }
 }
