@@ -25,10 +25,22 @@ namespace ActividadPractica2.Controllers
                 Activo = true
             },
 
+             new Estudiante
+            {
+                Id = 2,
+                Nombre = "Omar",
+                Apellido = "Genao",
+                Correo = "omargenao@gmail.com",
+                Carrera = "Ingenieria de Software",
+                Edad = 21,
+                Promedio = 95,
+                Activo = true
+            },
+
 
             new Estudiante
             {
-                Id = 2,
+                Id = 3,
                 Nombre = "Luis",
                 Apellido = "Fortuna",
                 Correo = "luis@gmail.com",
